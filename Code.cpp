@@ -42,6 +42,7 @@
 #include "motionrate.h"
 /* end of header files */
 
+int angle=0;
 
 /* start of material definitions */
 #ifdef LIGHT
@@ -50,7 +51,7 @@ GLfloat mat_specular[] =
 GLfloat mat_ambient[] =
 {0.24725, 0.1995, 0.0745, 1.0};
 GLfloat mat_diffuse[] =
-{0,1,0,0};
+{0.8999,0.1,0.1};
 GLfloat mat_shininess[] =
 {128.0 * 0.4};
 
@@ -59,7 +60,7 @@ GLfloat mat_specular2[] =
 GLfloat mat_ambient2[] =
 {0.19225, 0.19225, 0.19225};
 GLfloat mat_diffuse2[] =
-{0.80754, 0.80754, 0.80754};
+{0.75164f,0.60648f,0.22648f,1.0f};
 GLfloat mat_shininess2[] =
 {128.0};
 GLfloat mat_diffuse6[] =
@@ -742,7 +743,7 @@ void Enviro(char solid)
 {
   int i, j;
   glNewList(SOLID_ENVIRO, GL_COMPILE);
-  SetMaterial(mat_specular4, mat_ambient4, mat_diffuse4, mat_shininess4);
+  SetMaterial(mat_specular, mat_ambient, mat_diffuse, mat_shininess);
   glColor3f(0.0, 0.0, 0);
   Box(20.0, 0.5, 30.0, solid);//Road
   SetMaterial(mat_specular4, mat_ambient3, mat_diffuse6, mat_shininess);
@@ -750,7 +751,7 @@ void Enviro(char solid)
   glTranslatef(0.0, 0.0, -10.0);
   for (j = 0; j < 6; j++) 
   {
-    for (i = 0; i < 2; i++) 
+    for (i = 0; i < 50; i++) 
 	{
       if (i)
         glScalef(-1.0, 1.0, 1.0);
@@ -999,12 +1000,22 @@ void display2()
 	 glutSwapBuffers();
 }
 
+void Flash(int value)
+{
+	glRotatef(angle,1,0,0);
+	glRotatef(angle,0,1,1);
+	glColor3f(0,0,1);
+	glutWireSphere(4,10,10);
+	glutPostRedisplay();
+}
+
 void welcome()
 {
 	
 	glClearColor(1.0, 1.0, 1.0, 1.0);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glEnable(GL_DEPTH_TEST);
+  glutTimerFunc(20,Flash,0);
   square();
   x=-3.5; y=1.4;
      draws("D R     A  M  B  E  D  K  A  R      I  N  S  T  I  T  U  T  E      O  F      T  E  C  H  N  O  L  O  G  Y ");
@@ -1021,12 +1032,12 @@ void welcome()
      x=-2.5; y=-2.9;
      draws("B Y : ");
      x=-1.7; y=-3.3;
-     draws("SANTOSH	KUMAR	       USN : 1DA09CS098");
+     draws("SANTOSH	 KUMAR	       USN : 1DA09CS098");
      x=-1.7; y=-3.7;
      draws("SANDEEP V B               USN : 1DA09CS095");
 	  x=3;y=-4.0;
 	  draw1("PRESS 'c' TO CONTINUE");
-	 glFlush();
+	  glFlush();
 	 glutSwapBuffers();
 }
 void display1(void)
@@ -1122,7 +1133,7 @@ void animation_walk(void)
         elevation = 0.0;
       if (step == 0) 
 	  {
-        hip11 = -(frame * 1.7);
+        hip11 = -(frame * 1.7);//Height of the Lifting of Right leg
         if (1.7 * frame > 15)
           heel1 = frame * 1.7;
         heel2 = 0;
@@ -1194,13 +1205,13 @@ void animation_walk(void)
         else
           hip11 = 0;
         ankle1 = -hip11;
-        shoulder1 = -frame * 1.5;
-        shoulder2 = frame * 1.5;
+        shoulder1 = -frame * 1.5;//Speed of forward movement of right hand
+        shoulder2 = frame * 1.5;//Speed of forward movement of left hand
       }
       if (frame == 0.0)
         step+=1;
       if (frame > 0)
-        frame = frame - 1.0;//Controls the speed of Robot Speed
+        frame = frame - 1;//Controls the speed of Robot Speed
     }
   }
   if (step == 4)
@@ -1559,6 +1570,7 @@ int main(int argc, char **argv)
   glutReshapeFunc(myReshape);
   glutKeyboardFunc(keyboard);
   glutSpecialFunc(special);
+  glutTimerFunc(20,Flash,0);
   glutMenu();
   glutMainLoop();
   return 0;  
