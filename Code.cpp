@@ -42,6 +42,7 @@
 #include "motionrate.h"
 /* end of header files */
 
+int tflag=0;
 int angle=0;
 
 /* start of material definitions */
@@ -896,7 +897,7 @@ void DrawMech(void)
 }
 
 
-void square()
+void square(int value)
 {
 	glClearColor(1,1,0,0);
 	glColor3f(1,1,0);
@@ -914,6 +915,17 @@ void square()
 	glVertex2f(-6,-5);
 	glVertex2f(-6,-1);
 	glEnd();
+	glPushMatrix();
+	glRotatef(angle,1,0,0);
+	glRotatef(angle,0,1,0);
+	glRotatef(angle,0,0,1);
+	//glTranslatef(2,1,0);
+	glColor3f(0,0,1);
+	glutWireSphere(2,10,10);
+	angle+=0.5;
+	glPopMatrix();
+	if(tflag==0)
+	glutPostRedisplay();
 	glFlush();
 }
 void draw1(char *s)
@@ -999,24 +1011,29 @@ void display2()
 	 glFlush();
 	 glutSwapBuffers();
 }
-
+/*
 void Flash(int value)
-{
+{ 
 	glRotatef(angle,1,0,0);
-	glRotatef(angle,0,1,1);
+	glRotatef(angle,0,1,0);
+	glRotatef(angle,0,0,1);
+	//glTranslatef(2,1,0);
 	glColor3f(0,0,1);
-	glutWireSphere(4,10,10);
+	glutWireSphere(2,10,10);
+	angle+=0.5;
 	glutPostRedisplay();
+	glFlush();
 }
-
+*/
 void welcome()
 {
 	
 	glClearColor(1.0, 1.0, 1.0, 1.0);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glEnable(GL_DEPTH_TEST);
-  glutTimerFunc(20,Flash,0);
-  square();
+  square(0);
+  if(tflag==0)	 
+	  glutTimerFunc(20,square,0);
   x=-3.5; y=1.4;
      draws("D R     A  M  B  E  D  K  A  R      I  N  S  T  I  T  U  T  E      O  F      T  E  C  H  N  O  L  O  G  Y ");
      x=-1.2;y= 1;
@@ -1037,7 +1054,8 @@ void welcome()
      draws("SANDEEP V B               USN : 1DA09CS095");
 	  x=3;y=-4.0;
 	  draw1("PRESS 'c' TO CONTINUE");
-	  glFlush();
+	//	  glutTimerFunc(20,square,0);
+    glFlush();
 	 glutSwapBuffers();
 }
 void display1(void)
@@ -1231,7 +1249,9 @@ void animation(void)
   int i = 0;
   switch (key) 
   {
-		case 'c':display2();
+		case 'c':
+			tflag=1;
+			display2();
 				break;
 		case 'C':{
 					display1();
@@ -1570,7 +1590,7 @@ int main(int argc, char **argv)
   glutReshapeFunc(myReshape);
   glutKeyboardFunc(keyboard);
   glutSpecialFunc(special);
-  glutTimerFunc(20,Flash,0);
+  //glutTimerFunc(20,square,0);
   glutMenu();
   glutMainLoop();
   return 0;  
