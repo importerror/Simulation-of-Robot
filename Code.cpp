@@ -1,19 +1,19 @@
 /*
-* Funtional features 
+* Funtional features
 * ------------------
 * * online menu system avaliable by pressing left mouse button
 * * online cascading help system avaliable, providing information on
-*	the several  key strokes and what they do.
+* the several key strokes and what they do.
 * * animation sequence coded which makes the mech walk through an
-*	environment.  Shadows will soon be added to make it look
-*	more realistic.
+* environment. Shadows will soon be added to make it look
+* more realistic.
 * * menu control to view mech in wireframe or sold mode.
 * * various key strokes avaliable to control idependently the mechs
-*	many joints.
-* * various key strokes avaliable to view mech and environment from 
-*	different angles
+* many joints.
+* * various key strokes avaliable to view mech and environment from
+* different angles
 * * various key strokes avaliable to alter positioning of the single
-*	light source.
+* light source.
 *
 *
 * Program features
@@ -22,7 +22,7 @@
 * * uses display lists
 * * uses glut to manage windows, callbacks, and online menu.
 * * uses glpolygonfill() to maintain colors in wireframe and solid
-*	mode.
+* mode.
 *
 **/
 
@@ -31,7 +31,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include<stdio.h>
-#include "compilation.h" 
+#include "compilation.h"
 #include "displaylistdef.h"
 #define GLUT
 #define GLUT_KEY
@@ -102,11 +102,11 @@ GLfloat mat_shininess5[] =
 
 void draws(char *s)
 {
-	glClearColor(1,1,1,1);
-	glColor3f(0,0,0);
-	glRasterPos3f(x,y,1);
-	for (i = 0; s[i]!='\0'; i++) 
-		 glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, s[i]);
+glClearColor(1,1,1,1);
+glColor3f(0,0,0);
+glRasterPos3f(x,y,1);
+for (i = 0; s[i]!='\0'; i++)
+glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, s[i]);
 
 }
 /* start of the body motion functions */
@@ -310,11 +310,11 @@ void Box(float width, float height, float depth, char solid)
   char i, j = 0;
   float x = width / 2.0, y = height / 2.0, z = depth / 2.0;
 
-  for (i = 0; i < 4; i++) 
+  for (i = 0; i < 4; i++)
   {
     glRotatef(90.0, 0.0, 0.0, 1.0);
-    if (j) 
-	{
+    if (j)
+{
       if (!solid)
         glBegin(GL_LINE_LOOP);
       else
@@ -338,9 +338,9 @@ void Box(float width, float height, float depth, char solid)
         glEnd();
       }
       j = 0;
-    } 
-	else 
-	{
+    }
+else
+{
       if (!solid)
         glBegin(GL_LINE_LOOP);
       else
@@ -351,8 +351,8 @@ void Box(float width, float height, float depth, char solid)
       glVertex3f(-y, -x, -z);
       glVertex3f(-y, x, -z);
       glEnd();
-      if (solid) 
-	  {
+      if (solid)
+{
         glBegin(GL_TRIANGLES);
         glNormal3f(0.0, 0.0, 1.0);
         glVertex3f(0.0, 0.0, z);
@@ -375,7 +375,7 @@ void Octagon(float side, float height, char solid)
   float x = sin(0.785398163) * side, y = side / 2.0, z = height / 2.0, c;
 
   c = x + y;
-  for (j = 0; j < 8; j++) 
+  for (j = 0; j < 8; j++)
   {
     glTranslatef(-c, 0.0, 0.0);
     if (!solid)
@@ -389,8 +389,8 @@ void Octagon(float side, float height, char solid)
     glVertex3f(0.0, -y, -z);
     glEnd();
     glTranslatef(c, 0.0, 0.0);
-    if (solid) 
-	{
+    if (solid)
+{
       glBegin(GL_TRIANGLES);
       glNormal3f(0.0, 0.0, 1.0);
       glVertex3f(0.0, 0.0, z);
@@ -462,7 +462,7 @@ void MechHip(char solid)
   SetMaterial(mat_specular, mat_ambient, mat_diffuse, mat_shininess);
   glColor3f(1.0, 0.0, 0.0);
   Octagon(0.7, 0.5, solid);
-  for (i = 0; i < 2; i++) 
+  for (i = 0; i < 2; i++)
   {
     if (i)
       glScalef(-1.0, 1.0, 1.0);
@@ -507,14 +507,14 @@ void UpperArm(char solid)
   glRotatef(-90.0, 1.0, 0.0, 0.0);
   glTranslatef(-0.4, -1.85, 0.0);
   glRotatef(90.0, 0.0, 1.0, 0.0);
-  for (i = 0; i < 2; i++) 
+  for (i = 0; i < 2; i++)
   {
     if (i)
       gluCylinder(qobj, 0.5, 0.5, 0.8, 16, 10);
     else
       gluCylinder(qobj, 0.2, 0.2, 0.8, 16, 10);
   }
-  for (i = 0; i < 2; i++) 
+  for (i = 0; i < 2; i++)
   {
     if (i)
       glScalef(-1.0, 1.0, 1.0);
@@ -539,7 +539,7 @@ void VulcanGun(char solid)
   gluCylinder(qobj, 0.5, 0.5, 0.5, 16, 10);
   glTranslatef(0.0, 0.0, 0.5);
   gluDisk(qobj, 0.0, 0.5, 16, 10);
-  for (i = 0; i < 5; i++) 
+  for (i = 0; i < 5; i++)
   {
     glRotatef(72.0, 0.0, 0.0, 1.0);
     glTranslatef(0.0, 0.3, 0.0);
@@ -561,7 +561,7 @@ void ForeArm(char solid)
   glNewList(SOLID_MECH_FOREARM, GL_COMPILE);
   SetMaterial(mat_specular, mat_ambient, mat_diffuse, mat_shininess);
   glColor3f(1.0, 0, 0.0);
-  for (i = 0; i < 5; i++) 
+  for (i = 0; i < 5; i++)
   {
     glTranslatef(0.0, -0.1, -0.15);
     Box(0.6, 0.8, 0.2, solid);
@@ -583,7 +583,7 @@ void UpperLeg(char solid)
   glTranslatef(0.0, -1.0, 0.0);
   Box(0.4, 1.0, 0.7, solid);
   glTranslatef(0.0, -0.65, 0.0);
-  for (i = 0; i < 5; i++) 
+  for (i = 0; i < 5; i++)
   {
     Box(1.2, 0.3, 1.2, solid);
     glTranslatef(0.0, -0.2, 0.0);
@@ -608,7 +608,7 @@ void UpperLeg(char solid)
   SetMaterial(mat_specular2, mat_ambient2, mat_diffuse2, mat_shininess2);
   glColor3f(0.5, 0.5, 0.5);
   gluCylinder(qobj, 0.8, 0.8, 1.8, 16, 10);
-  for (i = 0; i < 2; i++) 
+  for (i = 0; i < 2; i++)
   {
     if (i)
       glScalef(-1.0, 1.0, 1.0);
@@ -639,17 +639,17 @@ void LowerLeg(char solid)
   float k, l;
   SetMaterial(mat_specular, mat_ambient, mat_diffuse, mat_shininess);
   glColor3f(1.0, 1.0, 0.0);
-  for (k = 0.0; k < 2.0; k++) 
+  for (k = 0.0; k < 2.0; k++)
   {
-    for (l = 0.0; l < 2.0; l++) 
-	{
+    for (l = 0.0; l < 2.0; l++)
+{
       glPushMatrix();
       glTranslatef(k, 0.0, l);
       SetMaterial(mat_specular, mat_ambient, mat_diffuse, mat_shininess);
       glColor3f(1.0, 1.0, 0.0);
       Box(1.0, 0.5, 1.0, solid);
       glTranslatef(0.0, -0.45, 0.0);
-	  SetMaterial(mat_specular2, mat_ambient2, mat_diffuse2, mat_shininess2);
+SetMaterial(mat_specular2, mat_ambient2, mat_diffuse2, mat_shininess2);
       glColor3f(0.5, 0.5, 0.5);
       glutSolidSphere(0.2, 16, 10);
       if (leg)
@@ -672,20 +672,20 @@ void LowerLeg(char solid)
       SetMaterial(mat_specular, mat_ambient, mat_diffuse, mat_shininess);
       glColor3f(1.0, 1.0, 0.0);
       Box(1.0, 0.5, 1.0, solid);
-      if (!k && !l) 
-	  {
+      if (!k && !l)
+{
         int j;
-		glTranslatef(-0.4, -0.8, 0.5);
+glTranslatef(-0.4, -0.8, 0.5);
         if (leg)
           glRotatef((GLfloat) ankle1, 1.0, 0.0, 0.0);
         else
           glRotatef((GLfloat) ankle2, 1.0, 0.0, 0.0);
         glRotatef(90.0, 0.0, 1.0, 0.0);
         gluCylinder(qobj, 0.8, 0.8, 1.8, 16, 10);
-        for (j = 0; j < 2; j++) 
-		{
-          if (j) 
-		  {
+        for (j = 0; j < 2; j++)
+{
+          if (j)
+{
             glScalef(-1.0, 1.0, 1.0);
             glTranslatef(0.0, 0.0, 1.8);
           }
@@ -721,10 +721,10 @@ void RocketPod(char solid)
   glColor3f(1.0, 1.0, 0.0);
   Box(2.0, 3.0, 4.0, solid);
   glTranslatef(-0.5, -1.0, 1.3);
-  for (i = 0; i < 2; i++) 
+  for (i = 0; i < 2; i++)
   {
-    for (j = 0; j < 3; j++) 
-	{
+    for (j = 0; j < 3; j++)
+{
       glTranslatef(i, j, 0.6);
       SetMaterial(mat_specular3, mat_ambient3, mat_diffuse3, mat_shininess3);
       glColor3f(1.0, 1.0, 1.0);
@@ -750,10 +750,10 @@ void Enviro(char solid)
   SetMaterial(mat_specular4, mat_ambient3, mat_diffuse6, mat_shininess);
   glColor3f(1, 0, 0);
   glTranslatef(0.0, 0.0, -10.0);
-  for (j = 0; j < 6; j++) 
+  for (j = 0; j < 6; j++)
   {
-    for (i = 0; i < 50; i++) 
-	{
+    for (i = 0; i < 50; i++)
+{
       if (i)
         glScalef(-1.0, 1.0, 1.0);
       glTranslatef(10.0, 4.0, 0.0);
@@ -817,7 +817,7 @@ void DrawMech(void)
   glTranslatef(0.5, 0.5, 0.0);
   glCallList(SOLID_MECH_ROCKET);
   glPopMatrix();
-  for (i = 0; i < 2; i++) 
+  for (i = 0; i < 2; i++)
   {
     glPushMatrix();
     if (i)
@@ -825,14 +825,14 @@ void DrawMech(void)
     glTranslatef(1.5, 0.0, 0.0);
     glCallList(SOLID_MECH_SHOULDER);
     glTranslatef(0.9, 0.0, 0.0);
-    if (i) 
-	{
+    if (i)
+{
       glRotatef((GLfloat) lat1, 0.0, 0.0, 1.0);
       glRotatef((GLfloat) shoulder1, 1.0, 0.0, 0.0);
       glRotatef((GLfloat) shoulder3, 0.0, 1.0, 0.0);
-    } 
-	else 
-	{
+    }
+else
+{
       glRotatef((GLfloat) lat2, 0.0, 0.0, 1.0);
       glRotatef((GLfloat) shoulder2, 1.0, 0.0, 0.0);
       glRotatef((GLfloat) shoulder4, 0.0, 1.0, 0.0);
@@ -860,24 +860,24 @@ void DrawMech(void)
   for (j = 0; j < 2; j++)
   {
     glPushMatrix();
-    if (j) 
-	{
+    if (j)
+{
       glScalef(-0.5, 0.5, 0.5);
       leg = 1;
     }
-	else
-	{
+else
+{
       glScalef(0.5, 0.5, 0.5);
       leg = 0;
     }
     glTranslatef(2.0, -1.5, 0.0);
-    if (j) 
-	{
+    if (j)
+{
       glRotatef((GLfloat) hip11, 1.0, 0.0, 0.0);
       glRotatef((GLfloat) hip12, 0.0, 0.0, 1.0);
-    } 
-	else
-	{
+    }
+else
+{
       glRotatef((GLfloat) hip21, 1.0, 0.0, 0.0);
       glRotatef((GLfloat) hip22, 0.0, 0.0, 1.0);
     }
@@ -899,164 +899,150 @@ void DrawMech(void)
 
 void square(int value)
 {
-	glClearColor(1,1,0,0);
-	glColor3f(1,1,0);
-	glBegin(GL_POLYGON);
-	glVertex2f(6,3);
-	glVertex2f(6,-1);
-	glVertex2f(-6,-1);
-	glVertex2f(-6,3);
-	glEnd();
-	glClearColor(0,0,0,0);
-	glColor3f(0,1,0.5);
-	glBegin(GL_POLYGON);
-	glVertex2f(6,-1);
-	glVertex2f(6,-5);
-	glVertex2f(-6,-5);
-	glVertex2f(-6,-1);
-	glEnd();
-	glPushMatrix();
-	glRotatef(angle,1,0,0);
-	glRotatef(angle,0,1,0);
-	glRotatef(angle,0,0,1);
-	//glTranslatef(2,1,0);
-	glColor3f(0,0,1);
-	glutWireSphere(2,10,10);
-	angle+=0.5;
-	glPopMatrix();
-	if(tflag==0)
-	glutPostRedisplay();
-	glFlush();
+glClearColor(1,1,0,0);
+glColor3f(1,1,0);
+glBegin(GL_POLYGON);
+glVertex2f(6,3);
+glVertex2f(6,-1);
+glVertex2f(-6,-1);
+glVertex2f(-6,3);
+glEnd();
+glClearColor(0,0,0,0);
+glColor3f(0,1,0.5);
+glBegin(GL_POLYGON);
+glVertex2f(6,-1);
+glVertex2f(6,-5);
+glVertex2f(-6,-5);
+glVertex2f(-6,-1);
+glEnd();
+glPushAttrib();
+glRotatef(angle,1,0,0);
+//glRotatef(angle,0,1,0);
+   glRotatef(angle,0,0,1);
+glScalef(1,1,1.0001);
+glColor3f(1,0,1);
+glutWireSphere(2,10,10);
+angle+=1; 
+glPopAttrib();
+if(tflag==0)
+glutPostRedisplay();
+glFlush();
 }
 void draw1(char *s)
 {
-	glColor3f(0,0,1);
-	glRasterPos3f(x,y,1);
-	for(i=0;s[i]!='\0';i++)
-		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,s[i]);
+glColor3f(0,0,1);
+glRasterPos3f(x,y,1);
+for(i=0;s[i]!='\0';i++)
+glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,s[i]);
 }
 void display2()
 {
-	glClearColor(1.0, 1.0, 0.0, 1.0);
+glClearColor(1.0, 1.0, 0.0, 1.0);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glEnable(GL_DEPTH_TEST);
   x=-1; y=1.4;
      draws("CONTROL INSTRUCTIONS ");
-	 x=-1; y=1.35;
+x=-1; y=1.35;
      draws("_______________________");
      x=-4.7;y=1.0;
      draw1("SHOULDER MOVEMENT:");
      x= -2.6; y=1;
-     draw1("FORWARD          : q,w");
+     draw1("FORWARD : q,w");
      x=-2.6,y=0.8;
-     draw1("BACKWARDS     : a,s");
+     draw1("BACKWARDS : a,s");
      x= -2.6;y=0.6;
-     draw1("OUTWARDS       : z,x ");
+     draw1("OUTWARDS : z,x ");
      x=-2.6; y=.4;
-     draw1("INWARDS           : Z,X");
+     draw1("INWARDS : Z,X");
      x=-4.7;y=0.1;
      draw1("ELBOW MOVEMENT:");
      x= -2.6; y=0.1;
-     draw1("UP                       : Q,W");
+     draw1("UP : Q,W");
      x=-2.6,y=-.1;
-     draw1("DOWN                : A,S");
+     draw1("DOWN : A,S");
      x=-4.7;y=-0.4;
      draw1("FIRE");
-	  x=-1.525;y=-0.4;
-	  draw1(":PAGE_UP");
-	  x=-4.7;y=-.7;
+x=-1.525;y=-0.4;
+draw1(":PAGE_UP");
+x=-4.7;y=-.7;
      draw1("HIP MOVEMENT:");
      x= -2.6; y=-0.7;
-     draw1("FORWARDS      : y,u");
-	 x= -2.6; y=-.9;
-     draw1("BACKWARDS   : h,j");
-	  x=-4.7;y=-1.2;
+     draw1("FORWARDS : y,u");
+x= -2.6; y=-.9;
+     draw1("BACKWARDS : h,j");
+x=-4.7;y=-1.2;
      draw1("KNEE MOVEMENT:");
      x= -2.6; y=-1.2;
-     draw1("FORWARDS      : n,m");
-	 x= -2.6; y=-1.4;
-     draw1("BACKWARDS   : N,M");
-	  x=-4.7;y=-1.7;
+     draw1("FORWARDS : n,m");
+x= -2.6; y=-1.4;
+     draw1("BACKWARDS : N,M");
+x=-4.7;y=-1.7;
      draw1("TORSO MOVEMENT:");
      x= -2.6; y=-1.7;
-     draw1("LEFT                  : d");
-	 x= -2.6; y=-1.9;
-     draw1("RIGHT               : g");
-	  x=-4.7;y=-2.2;
+     draw1("LEFT : d");
+x= -2.6; y=-1.9;
+     draw1("RIGHT : g");
+x=-4.7;y=-2.2;
      draw1("CAMERA MOVEMENT:");
      x= -2.6; y=-2.2;
-     draw1("RIGHT               : RIGHT ARROW");
-	 x= -2.6; y=-2.4;
-     draw1("LEFT                  : LEFT ARROW");
-	 x= -2.6; y=-2.6;
-     draw1("UP                      : UP ARROW");
-	 x= -2.6; y=-2.8;
-     draw1("DOWN               : DOWN ARROW");
-	  x=-4.7;y=-3.1;
+     draw1("RIGHT : RIGHT ARROW");
+x= -2.6; y=-2.4;
+     draw1("LEFT : LEFT ARROW");
+x= -2.6; y=-2.6;
+     draw1("UP : UP ARROW");
+x= -2.6; y=-2.8;
+     draw1("DOWN : DOWN ARROW");
+x=-4.7;y=-3.1;
      draw1("LIGHT SOURCE MOVEMENT:");
      x= -2.6; y=-3.1;
-     draw1("RIGHT               : p");
-	 x= -2.6; y=-3.3;
-     draw1("LEFT                  : i");
-	 x= -2.6; y=-3.5;
-     draw1("UP                      : 9");
-	 x= -2.6; y=-3.7;
-     draw1("DOWN               : 0");
-	 x= -4.7; y=-4.0;
+     draw1("RIGHT : p");
+x= -2.6; y=-3.3;
+     draw1("LEFT : i");
+x= -2.6; y=-3.5;
+     draw1("UP : 9");
+x= -2.6; y=-3.7;
+     draw1("DOWN : 0");
+x= -4.7; y=-4.0;
      draw1("QUIT");
-	 x=-1.535;y=-4.0;
-	  draw1(":e");
-	  x=3;y=-4.0;
-	  draw1("PRESS 'C' TO CONTINUE");
-	 glFlush();
-	 glutSwapBuffers();
+x=-1.535;y=-4.0;
+draw1(":e");
+x=3;y=-4.0;
+draw1("PRESS 'C' TO CONTINUE");
+glFlush();
+glutSwapBuffers();
 }
-/*
-void Flash(int value)
-{ 
-	glRotatef(angle,1,0,0);
-	glRotatef(angle,0,1,0);
-	glRotatef(angle,0,0,1);
-	//glTranslatef(2,1,0);
-	glColor3f(0,0,1);
-	glutWireSphere(2,10,10);
-	angle+=0.5;
-	glutPostRedisplay();
-	glFlush();
-}
-*/
+
 void welcome()
 {
-	
-	glClearColor(1.0, 1.0, 1.0, 1.0);
+
+glClearColor(1.0, 1.0, 1.0, 1.0);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glEnable(GL_DEPTH_TEST);
   square(0);
-  if(tflag==0)	 
-	  glutTimerFunc(20,square,0);
+  if(tflag==0)	
+glutTimerFunc(20,square,0);
   x=-3.5; y=1.4;
-     draws("D R     A  M  B  E  D  K  A  R      I  N  S  T  I  T  U  T  E      O  F      T  E  C  H  N  O  L  O  G  Y ");
+     draws("D R A M B E D K A R I N S T I T U T E O F T E C H N O L O G Y ");
      x=-1.2;y= 1;
-     draws("W    E    L    C    O    M    E ");
+     draws("W E L C O M E ");
      x= -0.5; y=0.5;
-     draws("T    O");
+     draws("T O");
      x=-2.2,y=0;
-     draws(" C O M P U T E R    G R A P H I C S    P R O J E C T   ");
+     draws(" C O M P U T E R G R A P H I C S P R O J E C T ");
      x= -4.5;y= -0.9;
-     draws("P R O J E C T  N A M E  : ");
+     draws("P R O J E C T N A M E : ");
      x=-1.2; y=-1.4;
-     draws("V U L C A N     G U N N E R");
+     draws("V U L C A N G U N N E R");
      x=-2.5; y=-2.9;
      draws("B Y : ");
      x=-1.7; y=-3.3;
-     draws("SANTOSH	 KUMAR	       USN : 1DA09CS098");
+     draws("SANTOSH KUMAR USN : 1DA10CS098");
      x=-1.7; y=-3.7;
-     draws("SANDEEP V B               USN : 1DA09CS095");
-	  x=3;y=-4.0;
-	  draw1("PRESS 'c' TO CONTINUE");
-	//	  glutTimerFunc(20,square,0);
+     draws("SANDEEP V B  USN : 1DA10CS095");
+x=3;y=-4.0;
+draw1("PRESS 'c' TO CONTINUE");
     glFlush();
-	 glutSwapBuffers();
+glutSwapBuffers();
 }
 void display1(void)
 {
@@ -1066,7 +1052,7 @@ void display1(void)
   glPushMatrix();
   glRotatef((GLfloat) turn, 0.0, 1.0, 0.0);
   glRotatef((GLfloat) turn1, 1.0, 0.0, 0.0);
-  if (solid_part) 
+  if (solid_part)
 {
     glPushMatrix();
     lighting();
@@ -1128,29 +1114,29 @@ void myReshape(int w, int h)
   gluPerspective(65.0, (GLfloat) w / (GLfloat) h, 1.0, 20.0);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
-  glTranslatef(0.0, 1.2, -5.5);  /* viewing transform  */
+  glTranslatef(0.0, 1.2, -5.5); /* viewing transform */
 }
 
 void animation_walk(void)
 {
   float angle;
   static int step;
-  if (step == 0 || step == 2) 
+  if (step == 0 || step == 2)
   {
     /* for(frame=3.0; frame<=21.0; frame=frame+3.0){ */
-    if (frame >= 0.0 && frame <= 21.0) 
-	{
+    if (frame >= 0.0 && frame <= 21.0)
+{
       if (frame == 0.0)
         frame = 3.0;
       angle = (180 / M_PI) * (acos(((cos((M_PI / 180) * frame) * 2.043) + 1.1625) / 3.2059));
-      if (frame > 0) 
-	  {
+      if (frame > 0)
+{
         elevation = -(3.2055 - (cos((M_PI / 180) * angle) * 3.2055));
       }
-	  else
+else
         elevation = 0.0;
-      if (step == 0) 
-	  {
+      if (step == 0)
+{
         hip11 = -(frame * 1.7);//Height of the Lifting of Right leg
         if (1.7 * frame > 15)
           heel1 = frame * 1.7;
@@ -1165,9 +1151,9 @@ void animation_walk(void)
         shoulder2 = -frame * 1.5;
         elbow1 = frame;
         elbow2 = -frame;
-      } 
-	  else 
-	  {
+      }
+else
+{
         hip21 = -(frame * 1.7);
         if (1.7 * frame > 15)
           heel2 = frame * 1.7;
@@ -1189,17 +1175,17 @@ void animation_walk(void)
         frame = frame + 1.0;
     }
   }
-  if (step == 1 || step == 3) 
+  if (step == 1 || step == 3)
   {
-      if (frame <= 21.0 && frame >= 0.0) 
-	  {
+      if (frame <= 21.0 && frame >= 0.0)
+{
       angle = (180 / M_PI) * (acos(((cos((M_PI / 180) * frame) * 2.043) + 1.1625) / 3.2029));
       if (frame > 0)
         elevation = -(3.2055 - (cos((M_PI / 180) * angle) * 3.2055));
       else
         elevation = 0.0;
-      if (step == 1) 
-	  {
+      if (step == 1)
+{
         elbow2 = hip11 = -frame;
         elbow1 = heel1 = frame;
         heel2 = 15;
@@ -1212,8 +1198,8 @@ void animation_walk(void)
         shoulder1 = 1.5 * frame;
         shoulder2 = -frame * 1.5;
       }
-	  else 
-	  {
+else
+{
         elbow1 = hip21 = -frame;
         elbow2 = heel2 = frame;
         heel1 = 15;
@@ -1247,189 +1233,189 @@ void animation(void)
 {
 
   int i = 0;
-  switch (key) 
+  switch (key)
   {
-		case 'c':
-			tflag=1;
-			display2();
-				break;
-		case 'C':{
-					display1();
-				 }
-	  break;
-		case 'e': exit(0);
+case 'c':
+tflag=1;
+display2();
+break;
+case 'C':{
+display1();
+}
+break;
+case 'e': exit(0);
     /* start arm control functions */
-		case 'q':{
-					shoulder2Subtract();
-					i++;
-				 }
-				 break;
-		case 'a':{
-			        shoulder2Add();
-					i++;
-				 }
-				 break;
-		case 'w':{
-					shoulder1Subtract();
-					i++;
-				 }
-				 break;
-		case 's':{
-					shoulder1Add();
-					i++;
-				 }
-				 break;
-		case '2':{
-					shoulder3Add();
-					i++;
-				 }
-				 break;
-		case '1':{
-					shoulder4Add();
-					i++;
-				 }
-				 break;
-		case '4':{
-					shoulder3Subtract();
-					i++;
-				 }
-				 break;
-		case '3':{
-					shoulder4Subtract();
-					i++;
-			     }
-		         break;
-		case 'z':{
-					lat2Raise();
-					i++;
-				 }
-		         break;
-		case 'Z':{
-					lat2Lower();
-					i++;
-				 }
-				 break;
-		case 'x':{
-					lat1Raise();
-					i++;
-				 }
-				 break;
-		case 'X':{
-					lat1Lower();
-					i++;
-				 }
-				 break;
-		case 'A':{
-					elbow2Add();
-					i++;
-				 }
-			     break;
-		case 'Q':{
-					elbow2Subtract();
-					i++;
-				 }
-				 break;
-		case 'S':{
-					elbow1Add();
-					i++;
-				 }
-				 break;
-		case 'W':{
-					elbow1Subtract();
-					i++;
-				 }
+case 'q':{
+shoulder2Subtract();
+i++;
+}
+break;
+case 'a':{
+shoulder2Add();
+i++;
+}
+break;
+case 'w':{
+shoulder1Subtract();
+i++;
+}
+break;
+case 's':{
+shoulder1Add();
+i++;
+}
+break;
+case '2':{
+shoulder3Add();
+i++;
+}
+break;
+case '1':{
+shoulder4Add();
+i++;
+}
+break;
+case '4':{
+shoulder3Subtract();
+i++;
+}
+break;
+case '3':{
+shoulder4Subtract();
+i++;
+}
+break;
+case 'z':{
+lat2Raise();
+i++;
+}
+break;
+case 'Z':{
+lat2Lower();
+i++;
+}
+break;
+case 'x':{
+lat1Raise();
+i++;
+}
+break;
+case 'X':{
+lat1Lower();
+i++;
+}
+break;
+case 'A':{
+elbow2Add();
+i++;
+}
+break;
+case 'Q':{
+elbow2Subtract();
+i++;
+}
+break;
+case 'S':{
+elbow1Add();
+i++;
+}
+break;
+case 'W':{
+elbow1Subtract();
+i++;
+}
                  break;
     /* end of arm control functions */
 
     /* start of torso control functions */
   case 'd':{
-				RotateAdd();
-				i++;
-		   }
-			break;
+RotateAdd();
+i++;
+}
+break;
   case 'g':{
-				RotateSubtract();
-				i++;
-		   }
-			break;
+RotateSubtract();
+i++;
+}
+break;
   case 'r':{
-				MechTiltAdd();
-				i++;
-			}
-			break;
+MechTiltAdd();
+i++;
+}
+break;
   case 'f':{
-				MechTiltSubtract();
-				i++;
-			}
-			break;
+MechTiltSubtract();
+i++;
+}
+break;
     /* end of torso control functions */
 
     /* start of leg control functions */
   case 'h':{
-				RaiseLeg2Forward();
-				i++;
-			}
-			break;
+RaiseLeg2Forward();
+i++;
+}
+break;
   case 'y':{
-				LowerLeg2Backwards();
-				i++;
-			}
-			break;
+LowerLeg2Backwards();
+i++;
+}
+break;
   case 'j':{
-				RaiseLeg1Forward();
-				i++;
-			}
-			break;
+RaiseLeg1Forward();
+i++;
+}
+break;
   case 'u':{
-				LowerLeg1Backwards();
-				i++;
-			}
-			break;
+LowerLeg1Backwards();
+i++;
+}
+break;
   
   case 'N':{
-				Heel2Add();
-				i++;
-			}
-			break;
+Heel2Add();
+i++;
+}
+break;
   case 'n':{
-				Heel2Subtract();
-				i++;
-			}
-			break;
+Heel2Subtract();
+i++;
+}
+break;
   case 'M':{
-				Heel1Add();
-				i++;
-			}
-			break;
+Heel1Add();
+i++;
+}
+break;
   case 'm':{
-				Heel1Subtract();
-				i++;
-			}
-			break;
+Heel1Subtract();
+i++;
+}
+break;
 
     /* end of leg control functions */
 
     /* start of light source position functions */
   case 'p':{
-				LightTurnRight();
-				i++;
-			}
-			break;
+LightTurnRight();
+i++;
+}
+break;
   case 'i':{
-				LightTurnLeft();
-				i++;
-			}
-			break;
+LightTurnLeft();
+i++;
+}
+break;
   case '0':{
-				LightForwards();
-				i++;
-			}
-			break;
+LightForwards();
+i++;
+}
+break;
   case '9':{
-				LightBackwards();
-				i++;
-			}
-			break;
+LightBackwards();
+i++;
+}
+break;
   
 
     /* end of light source position functions */
@@ -1447,32 +1433,32 @@ void special(int key, int x, int y)
     /* start of view position functions */
   
   case GLUT_KEY_RIGHT:{
-					    TurnRight();
-						i++;
-						}
-						break;
+TurnRight();
+i++;
+}
+break;
   case GLUT_KEY_LEFT:{
-						TurnLeft();
-						i++;
-						}
-						break;
+TurnLeft();
+i++;
+}
+break;
   case GLUT_KEY_DOWN:{
-						TurnForwards();
-						i++;
-						}
-						break;
+TurnForwards();
+i++;
+}
+break;
   case GLUT_KEY_UP:{
-						TurnBackwards();
-						i++;
-					}
-					break;
+TurnBackwards();
+i++;
+}
+break;
     /* end of view postions functions */
     /* start of miseclleneous functions */
   case GLUT_KEY_PAGE_UP:{
-							FireCannon();
-							i++;
-						}
-						break;
+FireCannon();
+i++;
+}
+break;
     /* end of miscelleneous functions */
   }
   if (i)
@@ -1481,7 +1467,7 @@ void special(int key, int x, int y)
 
 void menu_select(int mode)
 {
-  switch (mode) 
+  switch (mode)
   {
   case 1:
     glutIdleFunc(animation);
@@ -1490,8 +1476,8 @@ void menu_select(int mode)
     glutIdleFunc(NULL);
     break;
   case 3:
-	  Toggle();
-	  break;
+Toggle();
+break;
  case 4:
     exit(EXIT_SUCCESS);
    }
@@ -1507,45 +1493,45 @@ void glutMenu(void)
   int glut_menu[13];
 
   glut_menu[5] = glutCreateMenu(null_select);
-  glutAddMenuEntry("Forward       : q,w", 0);
-  glutAddMenuEntry("Backwards     : a,s", 0);
-  glutAddMenuEntry("Outwards      : z,x", 0);
-  glutAddMenuEntry("Inwards       : Z,X", 0);
+  glutAddMenuEntry("Forward : q,w", 0);
+  glutAddMenuEntry("Backwards : a,s", 0);
+  glutAddMenuEntry("Outwards : z,x", 0);
+  glutAddMenuEntry("Inwards : Z,X", 0);
 
   glut_menu[6] = glutCreateMenu(null_select);
-  glutAddMenuEntry("Upwards       : Q,W", 0);
-  glutAddMenuEntry("Downwards     : A,S", 0);
+  glutAddMenuEntry("Upwards : Q,W", 0);
+  glutAddMenuEntry("Downwards : A,S", 0);
   
   glut_menu[1] = glutCreateMenu(null_select);
   glutAddMenuEntry(" : Page_up", 0);
 
   glut_menu[8] = glutCreateMenu(null_select);
-  glutAddMenuEntry("Forward       : y,u", 0);
-  glutAddMenuEntry("Backwards     : h.j", 0);
+  glutAddMenuEntry("Forward : y,u", 0);
+  glutAddMenuEntry("Backwards : h.j", 0);
   
   glut_menu[9] = glutCreateMenu(null_select);
-  glutAddMenuEntry("Forward       : n,m", 0);
-  glutAddMenuEntry("Backwards     : N,M", 0);
+  glutAddMenuEntry("Forward : n,m", 0);
+  glutAddMenuEntry("Backwards : N,M", 0);
 
   glut_menu[9] = glutCreateMenu(null_select);
-  glutAddMenuEntry("Forward       : n,m", 0);
-  glutAddMenuEntry("Backwards     : N,M", 0);
+  glutAddMenuEntry("Forward : n,m", 0);
+  glutAddMenuEntry("Backwards : N,M", 0);
 
   glut_menu[10] = glutCreateMenu(null_select);
-  glutAddMenuEntry("Toes up       : K,L", 0);
-  glutAddMenuEntry("Toes down     : k,l", 0);
+  glutAddMenuEntry("Toes up : K,L", 0);
+  glutAddMenuEntry("Toes down : k,l", 0);
 
   glut_menu[11] = glutCreateMenu(null_select);
-  glutAddMenuEntry("Right         : right arrow", 0);
-  glutAddMenuEntry("Left          : left arrow", 0);
-  glutAddMenuEntry("Down          : up arrow", 0);
-  glutAddMenuEntry("Up            : down arrow", 0);
+  glutAddMenuEntry("Right : right arrow", 0);
+  glutAddMenuEntry("Left : left arrow", 0);
+  glutAddMenuEntry("Down : up arrow", 0);
+  glutAddMenuEntry("Up : down arrow", 0);
 
   glut_menu[12] = glutCreateMenu(null_select);
-  glutAddMenuEntry("Right         : p", 0);
-  glutAddMenuEntry("Left          : i", 0);
-  glutAddMenuEntry("Up            : 9", 0);
-  glutAddMenuEntry("Down          : 0", 0);
+  glutAddMenuEntry("Right : p", 0);
+  glutAddMenuEntry("Left : i", 0);
+  glutAddMenuEntry("Up : 9", 0);
+  glutAddMenuEntry("Down : 0", 0);
 
   glut_menu[4] = glutCreateMenu(NULL);
   glutAddSubMenu("At the shoulders? ", glut_menu[5]);
@@ -1556,8 +1542,8 @@ void glutMenu(void)
   glutAddSubMenu("At the knees?", glut_menu[9]);
   
   glut_menu[2] = glutCreateMenu(null_select);
-  glutAddMenuEntry("Turn left    : d", 0);
-  glutAddMenuEntry("Turn right    : g", 0);
+  glutAddMenuEntry("Turn left : d", 0);
+  glutAddMenuEntry("Turn right : g", 0);
 
    glut_menu[0] = glutCreateMenu(NULL);
   glutAddSubMenu("Move the arms.. ", glut_menu[4]);
@@ -1569,12 +1555,12 @@ void glutMenu(void)
   glutAddSubMenu("Rotate the light source..", glut_menu[12]);
 
   glutCreateMenu(menu_select);
-
+ 
   glutAddMenuEntry("Start Walk", 1);
   glutAddMenuEntry("Stop Walk", 2);
   glutAddMenuEntry("Toggle Wireframe", 3);
   glutAddSubMenu("How do I ..", glut_menu[0]);
-  glutAddMenuEntry("Quit   : e", 4);
+  glutAddMenuEntry("Quit : e", 4);
   glutAttachMenu(GLUT_LEFT_BUTTON);
   glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
@@ -1590,8 +1576,7 @@ int main(int argc, char **argv)
   glutReshapeFunc(myReshape);
   glutKeyboardFunc(keyboard);
   glutSpecialFunc(special);
-  //glutTimerFunc(20,square,0);
   glutMenu();
   glutMainLoop();
-  return 0;  
+  return 0;
 }
