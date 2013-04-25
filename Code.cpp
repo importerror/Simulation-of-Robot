@@ -915,15 +915,15 @@ glVertex2f(6,-5);
 glVertex2f(-6,-5);
 glVertex2f(-6,-1);
 glEnd();
-glPushAttrib();
+glPushMatrix();
 glRotatef(angle,1,0,0);
 //glRotatef(angle,0,1,0);
    glRotatef(angle,0,0,1);
 glScalef(1,1,1.0001);
 glColor3f(1,0,1);
 glutWireSphere(2,10,10);
-angle+=1; 
-glPopAttrib();
+angle+=1;
+glPopMatrix();
 if(tflag==0)
 glutPostRedisplay();
 glFlush();
@@ -1019,7 +1019,7 @@ glClearColor(1.0, 1.0, 1.0, 1.0);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glEnable(GL_DEPTH_TEST);
   square(0);
-  if(tflag==0)	
+  if(tflag==0)  
 glutTimerFunc(20,square,0);
   x=-3.5; y=1.4;
      draws("D R A M B E D K A R I N S T I T U T E O F T E C H N O L O G Y ");
@@ -1038,7 +1038,7 @@ glutTimerFunc(20,square,0);
      x=-1.7; y=-3.3;
      draws("SANTOSH KUMAR USN : 1DA10CS098");
      x=-1.7; y=-3.7;
-     draws("SANDEEP V B  USN : 1DA10CS095");
+     draws("SANDEEP V B USN : 1DA10CS095");
 x=3;y=-4.0;
 draw1("PRESS 'c' TO CONTINUE");
     glFlush();
